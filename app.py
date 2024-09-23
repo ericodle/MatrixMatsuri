@@ -82,7 +82,7 @@ def get_hint():
         coordinates = []
         for y in range(len(board)):
             for x in range(len(board[y])):
-                if MatrixMatsuri_game.find_from(board, hint_word, y, x, seen=set()):
+                if boggle_game.find_from(board, hint_word, y, x, seen=set()):
                     for i in range(len(hint_word)):
                         coordinates.append((y + i, x + i))
         return jsonify({"hint": hint_word, "coordinates": coordinates})
