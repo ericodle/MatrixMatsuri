@@ -1,7 +1,7 @@
-from boggle import Boggle
+from MatrixMatsuri import MatrixMatsuri
 from flask import Flask, session, redirect, render_template, flash, request, jsonify
 
-boggle_game = Boggle()
+MatrixMatsuri_game = MatrixMatsuri()
 app = Flask(__name__, static_folder="static")
 app.config["SECRET_KEY"] = "mk7638"
 
@@ -9,7 +9,7 @@ app.config["SECRET_KEY"] = "mk7638"
 @app.route("/")
 def homepage():
     """ Create and display the board on homepade """
-    session['board'] = boggle_game.make_board()
+    session['board'] = MatrixMatsuri_game.make_board()
     session["points"] = 0
     session["no_of_plays"] = session.get("no_of_plays", 0)
     session['score'] = session.get("score", 0)
@@ -32,9 +32,9 @@ def check_guess():
         return jsonify({"result": "You've already guessed this word!"})
 
     # Check if the word is a valid word in the dictionary
-    if guess in boggle_game.words:
+    if guess in MatrixMatsuri_game.words:
         # Check if the word is valid on the board
-        result = boggle_game.check_valid_word(board, guess)
+        result = MatrixMatsuri_game.check_valid_word(board, guess)
         if result == 'ok':
             session["points"] = session.get('points', 0) + len(guess)
             session["guessed_words"] = guessed_words + \
@@ -73,8 +73,8 @@ def get_hint():
 
     # Find the first unused word on the board
     unused_words = [
-        word for word in boggle_game.words if word not in guessed_words]
-    hint_word = next((word for word in unused_words if boggle_game.check_valid_word(
+        word for word in MatrixMatsuri_game.words if word not in guessed_words]
+    hint_word = next((word for word in unused_words if MatrixMatsuri_game.check_valid_word(
         board, word) == "ok"), None)
 
     if hint_word:
@@ -82,7 +82,7 @@ def get_hint():
         coordinates = []
         for y in range(len(board)):
             for x in range(len(board[y])):
-                if boggle_game.find_from(board, hint_word, y, x, seen=set()):
+                if MatrixMatsuri_game.find_from(board, hint_word, y, x, seen=set()):
                     for i in range(len(hint_word)):
                         coordinates.append((y + i, x + i))
         return jsonify({"hint": hint_word, "coordinates": coordinates})

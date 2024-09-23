@@ -1,7 +1,7 @@
 from unittest import TestCase
 from app import app
 from flask import session, json, jsonify
-from boggle import Boggle
+from MatrixMatsuri import MatrixMatsuri
 
 
 class FlaskTests(TestCase):

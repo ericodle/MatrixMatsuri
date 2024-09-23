@@ -1,9 +1,9 @@
-from boggle import Boggle
+from MatrixMatsuri import MatrixMatsuri
 
-# Initialize the Boggle game
-boggle_game = Boggle()
+# Initialize the MatrixMatsuri game
+MatrixMatsuri_game = MatrixMatsuri()
 
-# Create a sample Boggle board
+# Create a sample MatrixMatsuri board
 sample_board = [
     ['A', 'B', 'C', 'D', 'E'],
     ['F', 'G', 'H', 'I', 'J'],
@@ -12,8 +12,8 @@ sample_board = [
     ['U', 'V', 'W', 'X', 'Y']
 ]
 
-# Test the Boggle game logic
+# Test the MatrixMatsuri game logic
 guess = "HELLO"  # Replace with the word you want to test
-result = boggle_game.check_valid_word(sample_board, guess)
+result = MatrixMatsuri_game.check_valid_word(sample_board, guess)
 
 print(f"Result for '{guess}': {result}")
